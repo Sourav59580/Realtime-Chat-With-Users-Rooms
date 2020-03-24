@@ -1,0 +1,16 @@
+{
+  "name": "chatcord",
+  "version": "1.0.0",
+  "description": "This is realtime chat with users and rooms",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Sourav",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "moment": "^2.24.0",
+    "socket.io": "^2.3.0"
+  }
+}
