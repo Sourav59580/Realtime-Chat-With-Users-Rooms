@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatCord</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/4/cosmo/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <style>
+        body{
+            
+            height:100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container d-flex justify-content-center p-4">
+        <div class="card w-50 border-0 bg-primary rounded-lg">
+            <div class="card-header text-center text-light">
+               <h4 class="font-weight-bold"><i class='fas fa-smile'> </i> CHATCORD</h4> 
+            </div>
+            <div class="card-body ">
+                <form action="/chat.html">
+                    <div class="form-group">
+                        <label for="username" class="text-light">Username</label>
+                        <input type="text" class="form-control border-0 rounded" name="username" id="username">
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="room" class="text-light">Room</label>
+                        <select class="form-control border-0 rounded" name="room">
+                            <option value="html">HTML</option>
+                            <option value="css">CSS</option>
+                            <option value="js">JAVA SCRIPT</option>
+                            <option value="php">PHP</option>
+                        </select>
+                    </div>
+                    <input type="submit" class="form-control border-0 rounded mt-4" value="Join Chat">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
