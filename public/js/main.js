@@ -1,5 +1,6 @@
 const socket = io();
 var msgbox = document.querySelector(".chat-messages");
+var Room = document.querySelector(".room-name");
 
 //get username and room
 const { username , room } = Qs.parse(location.search,{
@@ -7,9 +8,16 @@ const { username , room } = Qs.parse(location.search,{
 });
 
 //send server username and room
-socket.emit('joinroom',{ username , room });
+socket.emit('joinRoom',{ username , room });
 console.log(username , room);
+Room.innerText = room;
 
+//Get room users
+socket.on('roomUsers',({ room,users })=>{
+    console.log(users);
+  outputRoomName(room);
+  outputUsers(users);
+})
 
 
 socket.on('message', message =>{
@@ -41,6 +49,7 @@ chatForm.addEventListener("submit",(e)=>{
 
 //Output message function
 function outputMessage(message){
+
     if(message.userstatus=='own')
     {
        var div1 = document.createElement("DIV");
@@ -94,7 +103,7 @@ function outputMessage(message){
         div.className = 'text-center';
         
         var button = document.createElement("button");
-        button.className = "btn border-0 rounded btn-md shadow-sm px-4";
+        button.className = "btn border-0 rounded btn-md shadow-sm px-4 my-3";
         button.innerHTML = `${message.text}`;
         button.style.cursor = 'default';
 
@@ -113,4 +122,39 @@ function outputMessage(message){
 
     // var msgbox = document.querySelector(".chat-messages");
     // msgbox.appendChild(div);
+}
+
+
+// Output RoomName function
+function outputRoomName(room){
+   Room.innerText = room;
+}
+
+//Output Users function
+function outputUsers(users){
+    document.querySelector(".userlist").innerHTML = "";
+    console.log(users.length);
+    var length = users.length;
+    var i;
+    for(i=0;i<length;i++){
+
+    var li = document.createElement("LI");
+    li.className = "list-group-item";
+   
+    var img = document.createElement("IMG");
+    img.src = 'https://img.icons8.com/color/36/000000/administrator-male.png';
+    img.className = "avatar mr-2";
+
+    li.appendChild(img);
+
+    var text = document.createTextNode(users[i].username);
+    li.appendChild(text);
+
+    document.querySelector(".userlist").appendChild(li);
+
+    }
+
+    
+
+
 }

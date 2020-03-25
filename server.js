@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const socketio = require("socket.io");
 const formateMessage = require('./utils/messages');
+const { userJoin,getCurrentUser,userLeave,getRoomUsers } = require("./utils/users");
 
 const app = express();
 
@@ -29,11 +30,22 @@ io.on("connection", socket =>{
     
     //Get username and room
     socket.on('joinRoom',({username,room})=>{
-    //Welcome current user
-    socket.emit('message',formateMessage('ChatCord','own','Welcome to ChatCord'));
+       //user join 
+       const user = userJoin(socket.id,username,room);
 
-    //Broadcast when a user connects
-    socket.broadcast.emit("message",formateMessage('Souav','other',"A person has joined the chat"));
+       socket.join(user.room);
+
+       //Welcome current user
+       socket.emit('message',formateMessage('ChatCord','own','Welcome to ChatCord'));
+
+       //Broadcast when a user connects
+       socket.broadcast.to(user.room).emit("message",formateMessage(`${user.username}`,'other',`${user.username} has joined the chat`));
+
+       //Send users and room info
+       socket.to(user.room).emit("roomUsers",{
+           room : user.room,
+           users : getRoomUsers(user.room)
+       })
        
     });
 
@@ -41,15 +53,35 @@ io.on("connection", socket =>{
 
     //Run when a client discount
     socket.on('disconnect',()=>{
-        io.emit("message",formateMessage('Sourav','all',"A person has just left the chat"));
+        const user = userLeave(socket.id);
+        if(user){
+            io.to(user.room).emit("message",formateMessage(`${user.username}`,'all',`${user.username} has just left the chat`));
+        }
+
+        //Send users and room info
+       socket.to(user.room).emit("roomUsers",{
+        room : user.room,
+        users : getRoomUsers(user.room)
+      })
+       
     })
 
     //Listen for chatMessage
     socket.on("chatMessage",(msg)=>{
+        //get current user
+       var user = getCurrentUser(socket.id);
+       console.log(user);
+
+       //Send users and room info
+       socket.to(user.room).emit("roomUsers",{
+        room : user.room,
+        users : getRoomUsers(user.room)
+       })
+
         //own see mesg
-        socket.emit("message",formateMessage('USER','own',msg));
+        socket.emit("message",formateMessage(`${user.username}`,'own',msg));
 
         //other people send msg
-        socket.broadcast.emit("message",formateMessage('USER','other',msg));
+        socket.broadcast.to(user.room).emit("message",formateMessage(`${user.username}`,'other',msg));
     })
 })
