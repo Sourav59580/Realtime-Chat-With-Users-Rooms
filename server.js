@@ -38,4 +38,9 @@ io.on("connection", socket =>{
     socket.on('disconnect',()=>{
         io.emit("message","A person has just left the chat");
     })
+
+    //Listen for chatMessage
+    socket.on("chatMessage",(msg)=>{
+        io.emit("message",msg);
+    })
 })
