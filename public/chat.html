@@ -16,30 +16,166 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
-   
+
     <style>
         /* width */
         ::-webkit-scrollbar {
-          width: 5px;
+            width: 5px;
         }
-        
+
         /* Track */
         ::-webkit-scrollbar-track {
-          box-shadow: inset 0 0 2px grey; 
-          border-radius: 10px;
+            box-shadow: inset 0 0 2px grey;
+            border-radius: 10px;
         }
-         
+
         /* Handle */
         ::-webkit-scrollbar-thumb {
-          background: red; 
-          border-radius: 10px;
+            background: red;
+            border-radius: 10px;
         }
-        
+
         /* Handle on hover */
         ::-webkit-scrollbar-thumb:hover {
-          background: #b30000; 
+            background: #b30000;
         }
-        </style>
+
+        
+        .media-chat {
+            padding-right: 64px;
+            margin-bottom: 0
+        }
+
+        .media {
+            padding: 16px 12px;
+            -webkit-transition: background-color .2s linear;
+            transition: background-color .2s linear
+        }
+
+        .media .avatar {
+            flex-shrink: 0
+        }
+
+        .avatar {
+            position: relative;
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            line-height: 36px;
+            text-align: center;
+            border-radius: 100%;
+            background-color: #f5f6f7;
+            color: #8b95a5;
+            text-transform: uppercase
+        }
+
+        .media-chat .media-body {
+            -webkit-box-flex: initial;
+            flex: initial;
+            display: table
+        }
+
+        .media-body {
+            min-width: 0
+        }
+
+        .media-chat .media-body p {
+            position: relative;
+            padding: 6px 8px;
+            margin: 4px 0;
+            background-color: #f5f6f7;
+            border-radius: 3px;
+            font-weight: 100;
+            color: #9b9b9b
+        }
+
+        .media>* {
+            margin: 0 8px
+        }
+
+        .media-chat .media-body p.meta {
+            background-color: transparent !important;
+            padding: 0;
+            opacity: .8;
+            color: #8b95a5;
+        }
+
+        
+        .media-meta-day {
+            -webkit-box-pack: justify;
+            justify-content: space-between;
+            -webkit-box-align: center;
+            align-items: center;
+            margin-bottom: 0;
+            color: #8b95a5;
+            opacity: .8;
+            font-weight: 400
+        }
+
+        .media {
+            padding: 16px 12px;
+            -webkit-transition: background-color .2s linear;
+            transition: background-color .2s linear
+        }
+
+        .media-meta-day::before {
+            margin-right: 16px
+        }
+
+        .media-meta-day::before,
+        .media-meta-day::after {
+            content: '';
+            -webkit-box-flex: 1;
+            flex: 1 1;
+            border-top: 1px solid #ebebeb
+        }
+
+        .media-meta-day::after {
+            content: '';
+            -webkit-box-flex: 1;
+            flex: 1 1;
+            border-top: 1px solid #ebebeb
+        }
+
+        .media-meta-day::after {
+            margin-left: 16px
+        }
+
+        .media-chat.media-chat-reverse {
+            padding-right: 12px;
+            padding-left: 64px;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: reverse;
+            flex-direction: row-reverse
+        }
+
+        .media-chat {
+            padding-right: 64px;
+            margin-bottom: 0
+        }
+
+        .media {
+            padding: 16px 12px;
+            -webkit-transition: background-color .2s linear;
+            transition: background-color .2s linear
+        }
+
+        .media-chat.media-chat-reverse .media-body p {
+            float: right;
+            clear: right;
+            background-color: #48b0f7;
+            color: #fff
+        }
+
+        .media-chat .media-body p {
+            position: relative;
+            padding: 6px 8px;
+            margin: 4px 0;
+            background-color: #f5f6f7;
+            border-radius: 3px
+        }
+
+    </style>
 </head>
 
 <body>
@@ -55,23 +191,40 @@
         </div>
         <div class="row" style="height: 89vh;">
             <div class="col-3 shadow-sm bg-light p-4">
-              <button class="btn border-0 shadow-sm m-1"><h5 class="font-weight-bold text-success"><i class="fa fa-comments-o mr-2"></i>Room Name :</h5></button>
-               <span>JAVA SCRIPT</span>
-            
-               <button class="btn border-0 shadow-sm m-1 my-3"><h5 class="font-weight-bold text-success"><i class="fa fa-group mr-2"></i>Online Users :</h5></button>
+                <button class="btn border-0 shadow-sm m-1">
+                    <h5 class="font-weight-bold text-success"><i class="fa fa-comments-o mr-2"></i>Room Name :</h5>
+                </button>
+                <span>JAVA SCRIPT</span>
+
+                <button class="btn border-0 shadow-sm m-1 my-3">
+                    <h5 class="font-weight-bold text-success"><i class="fa fa-group mr-2"></i>Online Users :</h5>
+                </button>
                 <div class="users shadow-sm" style="max-height:350px; overflow-y: scroll;">
                     <ul class="list-group list-group-flush">
-                        
-                        <li class="list-group-item"><img src="./images/geek_male-512.png" class="w-25 rounded-circle shadow-sm border mr-2" style="overflow: hidden;">Cras justo odio</li>
-                        <li class="list-group-item"><img src="./images/geek_male-512.png" class="w-25 rounded-circle shadow-sm border mr-2" style="overflow: hidden;">Cras justo odio</li>
-                        
+
+                        <li class="list-group-item"><img src="./images/geek_male-512.png"
+                                class="w-25 rounded-circle shadow-sm border mr-2" style="overflow: hidden;">Cras justo
+                            odio</li>
+                        <li class="list-group-item"><img src="./images/geek_male-512.png"
+                                class="w-25 rounded-circle shadow-sm border mr-2" style="overflow: hidden;">Cras justo
+                            odio</li>
+
                     </ul>
                 </div>
 
             </div>
             <div class="col-9 shadow-sm p-0">
                 <div class="chat-messages" style="padding: 30px;max-height:500px; overflow-y: scroll;">
-                  
+                    
+                    <!-- <div class="text-center">
+                     <button class="btn border-0 rounded btn-md shadow-sm px-4" style="cursor:default;">Sourav has just left the chat</button>
+                    </div>
+
+                    <div class="media media-chat media-chat-reverse">
+                        <div class="media-body">
+                            <p>Is that okay? <small class="ml-3">00.09</small></p>
+                        </div>
+                    </div> -->
                     <!-- <div class="msg-box bg-primary text-light px-4 py-1 mb-3 w-50" style="border-radius:2px 50px 2px 30px;">
                         <span>Brand 9.12pm</span>
                         <p>Hello sourav,Good morning</p>
@@ -80,8 +233,15 @@
                         <span>Brand 9.12pm</span>
                         <p>Hello sourav,Good morning</p>
                     </div> -->
-                    
-                    
+                    <!-- <div class="media media-chat"> <img class="avatar"
+                        src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="...">
+                    <div class="media-body">
+                        <p><small>Sourav</small><br>
+                            Okay</p>
+                        <p>We will go on sunday?</p>
+                        <p class="meta"><time datetime="2018">00:07</time></p>
+                    </div>
+                </div> -->
 
                 </div>
 
@@ -90,8 +250,8 @@
                         <form id="chat-form" class="form-inline">
                             <input class="form-control mr-sm-2 w-75 rounded border-0 shadow-sm" type="text"
                                 placeholder="Enter Message" required autocomplete="off" id="msg">
-                            <button class="btn btn-outline-success my-2 my-sm-0 rounded border-0 shadow-sm"
-                                ><i class="fa fa-paper-plane mr-2"></i> Send</button>
+                            <button class="btn btn-outline-success my-2 my-sm-0 rounded border-0 shadow-sm"><i
+                                    class="fa fa-paper-plane mr-2"></i> Send</button>
                         </form>
                     </div>
                 </div>
@@ -100,7 +260,8 @@
         </div>
 
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js"
+        integrity="sha256-TDxXjkAUay70ae/QJBEpGKkpVslXaHHayklIVglFRT4=" crossorigin="anonymous"></script>
     <!-- <script src="/socket.io/socket.io.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
     <script src="./js/main.js"></script>
